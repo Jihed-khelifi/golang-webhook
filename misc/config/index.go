@@ -56,9 +56,11 @@ func loadDotEnv(filename string) error {
 func (e *Env) Setup() error {
 	var setupErr error
 	e.once.Do(func() {
-		if err := loadDotEnv(".env"); err != nil {
-			setupErr = fmt.Errorf("failed to load .env file: %w", err)
-			return
+		if _, err := os.Stat(".env"); err == nil {
+			if err := loadDotEnv(".env"); err != nil {
+				setupErr = fmt.Errorf("failed to load .env file: %w", err)
+				return
+			}
 		}
 		port, err := GetIntEnv("PORT")
 		if err != nil {

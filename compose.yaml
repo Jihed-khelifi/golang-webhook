@@ -1,0 +1,9 @@
+services:
+  server:
+    build:
+      context: .
+      target: final
+    ports:
+      - 1999:1999
+    env_file:
+      - .env

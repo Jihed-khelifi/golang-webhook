@@ -177,7 +177,6 @@ func (b *Event) StartIntervalTimer(ctx context.Context) {
 	for {
 		select {
 		case <-ticker.C:
-
 			timeSinceLastSend := time.Since(b.lastSentTime)
 			if timeSinceLastSend >= env.App.BatchInterval {
 				logrus.WithFields(logrus.Fields{
